@@ -6,7 +6,8 @@
   "author": "Apollo Tang",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/index.js"
+    "dev": "nodemon --exec babel-node src/index.js",
+    "build": "babel src/index.js --out-dir dist"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
