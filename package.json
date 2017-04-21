@@ -6,8 +6,10 @@
   "author": "Apollo Tang",
   "license": "MIT",
   "scripts": {
-    "dev": "nodemon --exec babel-node src/index.js",
-    "build": "babel src/index.js --out-dir dist"
+    "watch": "babel -w src/ -d dist/",
+    "build": "babel src/ -d dist/",
+    "serve": "babel -w src/ -d dist/ | nodemon --watch dist dist/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "babel-cli": "^6.24.1",
