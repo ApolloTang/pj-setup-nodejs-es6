@@ -1,4 +1,8 @@
 import express from 'express';
+import api from './api';
+
 const app = express();
 
-module.exports = app;
+app.use('/api/', api);
+
+export default app;

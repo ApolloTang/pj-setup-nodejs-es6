@@ -1,5 +1,7 @@
-import module_1 from './module-1';
+import express from 'express';
+const router = express.Router();
 
-console.log(module_1)
+import users from './users';
+router.use('/users', users);
 
-export default 'src/api/index.js loaded';
+module.exports = router;
