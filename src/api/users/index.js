@@ -1,10 +1,12 @@
 import express from 'express';
-const router = express.Router();
+import logger from '../../util/logger';
 
+const router = express.Router();
 
 router.route('/')
   .get(function(req, res){
-      res.send('users/index.js');
+    logger.log({a:'users/index.js'});
+    res.send('users/index.js');
   });
 
 export default router;
