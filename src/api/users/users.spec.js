@@ -1,7 +1,8 @@
+import request from 'supertest';
+import {expect} from 'chai';
+
 const fullPathToServer = process.env.ROOTPATH + '/src/server.js';
 const app = require(fullPathToServer);
-
-import {expect} from 'chai';
 
 describe('[users]', function(){
 
