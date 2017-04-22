@@ -2,14 +2,13 @@ import request from 'supertest';
 import {expect} from 'chai';
 
 const fullPathToServer = process.env.ROOTPATH + '/src/server.js';
-const app = require(fullPathToServer);
+const app = require(fullPathToServer).default;
 
 describe('[users]', function(){
 
   it('should get all users', function(done) {
-
     request(app)
-      .get('/users')
+      .get('/api/users')
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
@@ -21,7 +20,7 @@ describe('[users]', function(){
 
   it('should create a user', function(done) {
     request(app)
-      .post('/users')
+      .post('/api/users')
       .send({
         name: 'Mufasa',
         age: 100,
@@ -39,7 +38,7 @@ describe('[users]', function(){
 
   it('should delete a users', function(done) {
     request(app)
-      .post('/users')
+      .post('/api/users')
       .send({
         name: 'test user',
         age: 100,
@@ -50,7 +49,7 @@ describe('[users]', function(){
       .end(function(err, resp) {
         var user = resp.body;
         request(app)
-          .delete('/users/' + user.id)
+          .delete('/api/users/' + user.id)
           .end(function(err, resp) {
             expect(resp.body).to.eql(user);
             done();
@@ -60,7 +59,7 @@ describe('[users]', function(){
 
   it('should update a user', function(done) {
     request(app)
-      .post('/users')
+      .post('/api/users')
       .send({
         name: 'test user',
         age: 100,
@@ -71,7 +70,7 @@ describe('[users]', function(){
       .end(function(err, resp) {
         var user = resp.body;
         request(app)
-          .put('/users/' + user.id)
+          .put('/api/users/' + user.id)
           .send({
             name: 'new name'
           })
@@ -82,5 +81,4 @@ describe('[users]', function(){
       })
   });
 });
-
 

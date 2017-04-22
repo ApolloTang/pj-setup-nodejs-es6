@@ -7,6 +7,6 @@ const app = express();
 
 middleware(app);
 
-app.use('/api/', api);
+app.use('/api', api);
 
 export default app;
