@@ -20,12 +20,7 @@ router.param('id', (req, res, next, id)=>{
 
 router.route('/')
   .get( (req, res, next) => {
-    ///////////////////
-    // return next(new Error('testing throwing error') );
-    // next('testing throwing error');
-    next(new Error('testing throwing error'));
-    ///////////////////
-    // res.json(users);
+    res.json(users);
   })
   .post( updateId, (req, res) => {
     const user = req.body;

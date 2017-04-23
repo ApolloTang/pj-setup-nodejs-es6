@@ -10,11 +10,6 @@ middleware(app);
 
 app.use('/api', api);
 
-app.use(
-  function(a, b, c, d){
-    console.log('error has called')
-    error('xxxxxxxxxxxxxxxx')(a,b,c,d);
-  }
-);
+app.use(error());
 
 export default app;
