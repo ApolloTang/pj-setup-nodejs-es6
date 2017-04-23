@@ -19,7 +19,14 @@ router.param('id', (req, res, next, id)=>{
 
 
 router.route('/')
-  .get( (req, res) => { res.json(users); })
+  .get( (req, res, next) => {
+    ///////////////////
+    // return next(new Error('testing throwing error') );
+    // next('testing throwing error');
+    return next(new Error('testing throwing error'));
+    ///////////////////
+    // res.json(users);
+  })
   .post( updateId, (req, res) => {
     const user = req.body;
     users.push(user);
