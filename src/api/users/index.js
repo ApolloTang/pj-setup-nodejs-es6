@@ -7,6 +7,17 @@ const router = express.Router();
 const users = [];
 let id = 0;
 
+router.param('id', (req, res, next, id)=>{
+  const userIndex = _.findIndex(users, {id});
+  if (userIndex) {
+    req.userIndex = userIndex;
+    next();
+  } else {
+    res.send();
+  }
+});
+
+
 router.route('/')
   .get( (req, res) => { res.json(users); })
   .post( updateId, (req, res) => {
@@ -17,12 +28,12 @@ router.route('/')
 
 router.route('/:id')
   .delete( (req, res) => {
-    const userIndex = _.findIndex(users, {id: req.params.id});
+    const userIndex = req.userIndex;
     const deletedUser = users.splice(userIndex, 1);
     res.json(deletedUser[0]);
   })
   .get( (req, res) => {
-    const userIndex = _.findIndex(users, {id: req.params.id});
+    const userIndex = req.userIndex;
     const foundedUser = users[userIndex];
     res.json(deletedUser[0]);
   })
@@ -31,7 +42,7 @@ router.route('/:id')
     if (userToUpdate.id) {
       delete userToUpdate.id;
     }
-    const userIndex = _.findIndex(users, {id: req.params.id});
+    const userIndex = req.userIndex;
     if (!users[userIndex]) {
       res.send();
     } else {
