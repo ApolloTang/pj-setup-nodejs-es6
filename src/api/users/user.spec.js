@@ -4,9 +4,9 @@ import {expect} from 'chai';
 const ROOTPATH = process.env.ROOTPATH;
 console.log('ROOTPATH: ', ROOTPATH );
 
-const fullPathToConfig = ROOTPATH + '/src/config/index.js';
-const config = require(fullPathToConfig).default;
-console.log('user.spect.js config: ',  JSON.stringify(config, null, 4) );
+// const fullPathToConfig = ROOTPATH + '/src/config/index.js';
+// const config = require(fullPathToConfig).default;
+// console.log('user.spect.js config: ',  JSON.stringify(config, null, 4) );
 
 const fullPathToServer = ROOTPATH + '/src/server.js';
 const app = require(fullPathToServer).default;
