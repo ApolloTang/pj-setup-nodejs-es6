@@ -29,10 +29,7 @@ describe('[users]', function(){
     request(app)
       .post('/api/users')
       .send({
-        name: 'Mufasa',
-        age: 100,
-        pride: 'Evil users',
-        gender:'male'
+        name: 'Mufasa'
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -47,16 +44,13 @@ describe('[users]', function(){
     request(app)
       .post('/api/users')
       .send({
-        name: 'test user',
-        age: 100,
-        pride: 'test user',
-        gender:'female'
+        name: 'test user'
       })
       .set('Accept', 'application/json')
       .end(function(err, resp) {
         var user = resp.body;
         request(app)
-          .delete('/api/users/' + user.id)
+          .delete('/api/users/' + user._id)
           .end(function(err, resp) {
             expect(resp.body).to.eql(user);
             done();
@@ -68,16 +62,13 @@ describe('[users]', function(){
     request(app)
       .post('/api/users')
       .send({
-        name: 'test user',
-        age: 100,
-        pride: 'test user',
-        gender:'female'
+        name: 'test user'
       })
       .set('Accept', 'application/json')
       .end(function(err, resp) {
         var user = resp.body;
         request(app)
-          .put('/api/users/' + user.id)
+          .put('/api/users/' + user._id)
           .send({
             name: 'new name'
           })
