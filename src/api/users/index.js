@@ -2,9 +2,14 @@ import _ from 'lodash';
 
 import express from 'express';
 import logger from '../../util/logger';
-import User from './user-model';
+
+import createRoutes from  '../../util/create-routes';
+import controller from  './user-controller';
+// import User from './user-model';
 
 const router = express.Router();
+
+createRoutes(controller, router);
 
 // const users = [];
 // let id = 0;
@@ -30,25 +35,26 @@ const router = express.Router();
 //     );
 // });
 
-router.route('/')
-  .get( (req, res, next) => {
-    res.json(users);
-  })
-  .post( (req, res, next) => {
-    const newUser = req.body;
-    console.log('in post: ', newUser);
-    User.create(newUser)
-      .then(
-        userJustCreated=>{
-          console.log('in post: userJustCreated: ', userJustCreated);
-          res.json(userJustCreated);
-        },
-        err=>{
-          console.log('in post: err: ',err)
-          next(err);
-        }
-      )
-  });
+
+// router.route('/')
+//   .get( (req, res, next) => {
+//     res.json(users);
+//   })
+//   .post( (req, res, next) => {
+//     const newUser = req.body;
+//     console.log('in post: ', newUser);
+//     User.create(newUser)
+//       .then(
+//         userJustCreated=>{
+//           console.log('in post: userJustCreated: ', userJustCreated);
+//           res.json(userJustCreated);
+//         },
+//         err=>{
+//           console.log('in post: err: ',err)
+//           next(err);
+//         }
+//       )
+//   });
 
 // router.route('/:id')
 //   .delete( (req, res) => {
