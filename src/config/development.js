@@ -1,4 +1,7 @@
 export default {
   // enabled logging for development
-  logging: true
+  logging: true,
+  db: {
+    url: 'mongodb://localhost/sushi'
+  }
 };

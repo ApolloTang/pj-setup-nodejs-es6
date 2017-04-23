@@ -1,4 +1,7 @@
 export default {
   // disbable logging for testing
-  logging: false
+  logging: false,
+  db: {
+    url: 'mongodb://localhost/sushi'
+  }
 };
