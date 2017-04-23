@@ -23,7 +23,7 @@ router.route('/')
     ///////////////////
     // return next(new Error('testing throwing error') );
     // next('testing throwing error');
-    return next(new Error('testing throwing error'));
+    next(new Error('testing throwing error'));
     ///////////////////
     // res.json(users);
   })
