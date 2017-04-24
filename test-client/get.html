@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body onload="requestApi();">
+<div id="photos">Loading photos...</div>
+<script>
+function requestApi() {
+  var method = 'GET';
+  var url = 'http://localhost:3000/api/users'
+
+  var xhr = new XMLHttpRequest();
+  if (!('withCredentials' in xhr)) {
+    console.log('Browser does not support CORS.');
+    return;
+  }
+  xhr.open(method, url);
+
+  xhr.onerror = function() {
+    console.log('There was an error.');
+  };
+
+  xhr.onload = function() {
+    var data = JSON.parse(xhr.responseText);
+    console.log(data)
+  };
+
+  xhr.send();
+}
+</script>
+</body>
+</html>

@@ -1,10 +1,11 @@
-var morgan = require('morgan');
-var bodyParser = require('body-parser');
+import morgan from 'morgan';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 
-// setup global middleware here
 
 export default function(app) {
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({ extended: true }));
   app.use(bodyParser.json());
+  app.use(cors());
 };
