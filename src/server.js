@@ -8,7 +8,16 @@ import error from './middleware/error.js';
 
 const app = express();
 mongoose.Promise = global.Promise;
-mongoose.connect(config.db.url);
+
+
+// Wrap connect in try-catch to prevent error in testing resatart
+// ref: http://stackoverflow.com/a/41408315/3136861
+try {
+  mongoose.connect(config.db.url);
+} catch (err) {
+  mongoose.createConnection(config.db.url);
+}
+
 
 middleware(app);
 
