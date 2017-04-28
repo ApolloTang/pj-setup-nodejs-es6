@@ -18,7 +18,6 @@ const params = (req, res, next, id) => {
 
 const post = (req, res, next) => {
   const newUser = req.body;
-  console.log('in post: ', newUser);
   User.create(newUser)
     .then(
       userJustCreated=>{
@@ -44,7 +43,19 @@ const get = (req, res, next) => {
 
 const getOne = (req, res, next) => {
   var user = req.user;
-  res.json(user);
+  var id = user._id;
+  console.log('in getOne: ', user);
+  User.find({'_id':id})
+    .then(
+      foundUser => {
+        console.log('foundUser: ', foundUser);
+        res.json(foundUser[0]);
+      },
+      err=>{
+        console.log('error: ', err);
+        next(err);
+      }
+    );
 };
 
 const put = (req, res, next) => {

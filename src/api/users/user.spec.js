@@ -40,6 +40,24 @@ describe('[users]', function(){
       })
   });
 
+  it('should get a users by Id', function(done) {
+    request(app)
+      .post('/api/users')
+      .send({
+        name: 'get me'
+      })
+      .set('Accept', 'application/json')
+      .end(function(err, resp) {
+        var user = resp.body;
+        request(app)
+          .get('/api/users/' + user._id)
+          .end(function(err, resp) {
+            expect(resp.body).to.eql(user);
+            done();
+          });
+      })
+  });
+
   it('should delete a users', function(done) {
     request(app)
       .post('/api/users')
