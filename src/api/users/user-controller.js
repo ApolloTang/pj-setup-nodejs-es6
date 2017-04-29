@@ -4,22 +4,28 @@ import _ from 'lodash';
 
 const params = (req, res, next, _id) => {
   let id = _id
-  // id = mongoose.Types.ObjectId(_id);
-  User.findById(id).exec()
-    .then(
-      user=>{
-        if (!user) {
-          next(new Error(`No user with id: ${id}`));
-        } else {
-          req.user = user;
-          next();
+  if (id.match(/^[0-9a-fA-F]{24}$/)) {
+    // Yes, it's a valid ObjectId, proceed with `findById` call.
+    // Ref: http://stackoverflow.com/questions/14940660/whats-mongoose-error-cast-to-objectid-failed-for-value-xxx-at-path-id
+    User.findById(id).exec()
+      .then(
+        user=>{
+          if (!user) {
+            res.status(404).send(`No user with id: ${id}`);
+            // next(new Error(`No user with id: ${id}`));
+          } else {
+            req.user = user;
+            next();
+          }
+        },
+        err=>{
+          // res.status(404).send(`${err.message}. Meaning: No user with id: ${id}`);
+          next(err);
         }
-      },
-      err=>{
-        res.status(404).send(`${err.message}. Meaning: No user with id: ${id}`);
-        // next(err);
-      }
-    );
+      );
+  } else {
+      res.status(404).send(`Invalid user id: ${id}`);
+  }
 };
 
 const post = (req, res, next) => {
