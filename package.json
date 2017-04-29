@@ -27,6 +27,7 @@
   "dependencies": {
     "bluebird": "^3.5.0",
     "body-parser": "^1.17.1",
+    "chance": "^1.0.8",
     "colors": "^1.1.2",
     "cors": "^2.8.3",
     "express": "^4.15.2",

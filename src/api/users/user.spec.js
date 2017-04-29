@@ -11,6 +11,12 @@ console.log('ROOTPATH: ', ROOTPATH );
 const fullPathToServer = ROOTPATH + '/src/server.js';
 const app = require(fullPathToServer).default;
 
+
+import Chance from 'chance';
+var chance = new Chance();
+
+
+
 describe('[users]', function(){
 
   it('should get all users', function(done) {
@@ -29,7 +35,7 @@ describe('[users]', function(){
     request(app)
       .post('/api/users')
       .send({
-        name: 'Mufasa'
+        name: chance.name()
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -44,7 +50,7 @@ describe('[users]', function(){
     request(app)
       .post('/api/users')
       .send({
-        name: 'get me'
+        name: chance.name()
       })
       .set('Accept', 'application/json')
       .end(function(err, resp) {
@@ -71,7 +77,7 @@ describe('[users]', function(){
     request(app)
       .post('/api/users')
       .send({
-        name: 'test user'
+        name: chance.name()
       })
       .set('Accept', 'application/json')
       .end(function(err, resp) {
@@ -86,10 +92,12 @@ describe('[users]', function(){
   });
 
   it('should update a user', function(done) {
+    const name_old = chance.name()
+    const name_new = chance.name()
     request(app)
       .post('/api/users')
       .send({
-        name: 'test user'
+        name: name_old
       })
       .set('Accept', 'application/json')
       .end(function(err, resp) {
@@ -97,10 +105,10 @@ describe('[users]', function(){
         request(app)
           .put('/api/users/' + user._id)
           .send({
-            name: 'new name'
+            name: name_new
           })
           .end(function(err, resp) {
-            expect(resp.body.name).to.equal('new name');
+            expect(resp.body.name).to.equal(name_new);
             done();
           });
       })
