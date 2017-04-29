@@ -40,7 +40,7 @@ describe('[users]', function(){
       })
   });
 
-  it('should get a users by Id', function(done) {
+  it('should be able to get a users by Id', function(done) {
     request(app)
       .post('/api/users')
       .send({
@@ -56,6 +56,15 @@ describe('[users]', function(){
             done();
           });
       })
+  });
+
+  it('should return 404 when provide an invalid id', function(done) {
+    request(app)
+      .get('/api/users/invalid_id')
+      .expect(404)
+      .end(function(err, resp) {
+        done();
+      });
   });
 
   it('should delete a users', function(done) {
