@@ -11,6 +11,12 @@ console.log('ROOTPATH: ', ROOTPATH );
 const fullPathToServer = ROOTPATH + '/src/server.js';
 const app = require(fullPathToServer).default;
 
+
+import Chance from 'chance';
+var chance = new Chance();
+
+
+
 describe('[users]', function(){
 
   it('should get all users', function(done) {
@@ -29,7 +35,7 @@ describe('[users]', function(){
     request(app)
       .post('/api/users')
       .send({
-        name: 'Mufasa'
+        name: chance.name()
       })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
@@ -40,31 +46,38 @@ describe('[users]', function(){
       })
   });
 
-  it('should get a user by id', function(done) {
+  it('should be able to get a users by Id', function(done) {
     request(app)
       .post('/api/users')
       .send({
-        name: 'get me'
+        name: chance.name()
       })
       .set('Accept', 'application/json')
-      .expect('Content-Type', /json/)
-      .expect(201)
-      .end((err, resp)=>{
+      .end(function(err, resp) {
         var user = resp.body;
         request(app)
-          .get('api/users/' + user._id)
-          .end((err, resp) => {
+          .get('/api/users/' + user._id)
+          .end(function(err, resp) {
             expect(resp.body).to.eql(user);
             done();
           });
       })
   });
 
+  it('should return 404 when provide an invalid id', function(done) {
+    request(app)
+      .get('/api/users/invalid_id')
+      .expect(404)
+      .end(function(err, resp) {
+        done();
+      });
+  });
+
   it('should delete a users', function(done) {
     request(app)
       .post('/api/users')
       .send({
-        name: 'test user'
+        name: chance.name()
       })
       .set('Accept', 'application/json')
       .end(function(err, resp) {
@@ -79,10 +92,12 @@ describe('[users]', function(){
   });
 
   it('should update a user', function(done) {
+    const name_old = chance.name()
+    const name_new = chance.name()
     request(app)
       .post('/api/users')
       .send({
-        name: 'test user'
+        name: name_old
       })
       .set('Accept', 'application/json')
       .end(function(err, resp) {
@@ -90,10 +105,10 @@ describe('[users]', function(){
         request(app)
           .put('/api/users/' + user._id)
           .send({
-            name: 'new name'
+            name: name_new
           })
           .end(function(err, resp) {
-            expect(resp.body.name).to.equal('new name');
+            expect(resp.body.name).to.equal(name_new);
             done();
           });
       })

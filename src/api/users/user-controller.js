@@ -1,28 +1,39 @@
+import mongoose from 'mongoose';
 import User from './user-model';
 import _ from 'lodash';
 
-const params = (req, res, next, id) => {
-  User.findById(id)
-    .then(
-      user=>{
-        if (!user) {
-          next(new Error(`No user with id: ${id}`));
-        } else {
-          req.user = user;
-          next();
+const params = (req, res, next, _id) => {
+  let id = _id
+  if (id.match(/^[0-9a-fA-F]{24}$/)) {
+    // Yes, it's a valid ObjectId, proceed with `findById` call.
+    // Ref: http://stackoverflow.com/questions/14940660/whats-mongoose-error-cast-to-objectid-failed-for-value-xxx-at-path-id
+    User.findById(id).exec()
+      .then(
+        user=>{
+          if (!user) {
+            res.status(404).send(`No user with id: ${id}`);
+            // next(new Error(`No user with id: ${id}`));
+          } else {
+            req.user = user;
+            next();
+          }
+        },
+        err=>{
+          // res.status(404).send(`${err.message}. Meaning: No user with id: ${id}`);
+          next(err);
         }
-      },
-      err=>{ next(err); }
-    );
+      );
+  } else {
+      res.status(404).send(`Invalid user id: ${id}`);
+  }
 };
 
 const post = (req, res, next) => {
   const newUser = req.body;
-  console.log('in post: ', newUser);
   User.create(newUser)
     .then(
       userJustCreated=>{
-        res.json(userJustCreated);
+        res.status(201).json(userJustCreated);
       },
       err=>{
         next(err);
@@ -45,6 +56,20 @@ const get = (req, res, next) => {
 const getOne = (req, res, next) => {
   var user = req.user;
   res.json(user);
+  // -- The following is handle in param middleware -- //
+  //
+  // var user = req.user;
+  // var id = user._id;
+  // User.find({'_id':id})
+  //   .then(
+  //     foundUser => {
+  //       res.json(foundUser[0]);
+  //     },
+  //     err=>{
+  //       console.log('errorrrr: ', id)
+  //       res.status(404).send(`${err.message}`);
+  //     }
+  //   );
 };
 
 const put = (req, res, next) => {
