@@ -33,7 +33,7 @@ const post = (req, res, next) => {
   User.create(newUser)
     .then(
       userJustCreated=>{
-        res.json(userJustCreated);
+        res.status(201).json(userJustCreated);
       },
       err=>{
         next(err);
