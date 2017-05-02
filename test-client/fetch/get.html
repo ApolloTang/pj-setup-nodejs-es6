@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<body onload="requestApi();">
+<script>
+function requestApi() {
+
+  var headers = new Headers();
+  headers.append('Content-Type', 'application/json');
+  var url = 'http://localhost:3000/api/users'
+  var init = {
+    method: 'GET',
+    headers: headers,
+    mode: 'cors',
+    cache: 'default'
+  };
+  request = new Request(url, init);
+
+  fetch(request).then( function(response) {
+    return response.json();
+  }).then(function(j) {
+    console.log(j);
+  });
+
+}
+</script>
+</body>
+</html>

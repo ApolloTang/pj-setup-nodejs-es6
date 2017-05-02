@@ -19,7 +19,7 @@ var chance = new Chance();
 
 describe('[users]', function(){
 
-  it('should get all users', function(done) {
+  it(':::: should get all users', function(done) {
     request(app)
       .get('/api/users')
       .set('Accept', 'application/json')
@@ -31,7 +31,7 @@ describe('[users]', function(){
       })
   });
 
-  it('should create a user', function(done) {
+  it(':::: should create a user', function(done) {
     request(app)
       .post('/api/users')
       .send({
@@ -46,7 +46,7 @@ describe('[users]', function(){
       })
   });
 
-  it('should be able to get a users by Id', function(done) {
+  it(':::: should be able to get a users by Id', function(done) {
     request(app)
       .post('/api/users')
       .send({
@@ -64,16 +64,27 @@ describe('[users]', function(){
       })
   });
 
-  it('should return 404 when provide an invalid id', function(done) {
+  it(':::: should return 404 when provide an invalid id', function(done) {
     request(app)
       .get('/api/users/invalid_id')
       .expect(404)
       .end(function(err, resp) {
+        expect(resp.status).to.eql(404);
         done();
       });
   });
 
-  it('should delete a users', function(done) {
+  it(':::: should return 404 when provide id that does not exist', function(done) {
+    request(app)
+      .get('/api/users/111111111111111111111111')
+      .expect(404)
+      .end(function(err, resp) {
+        expect(resp.status).to.eql(404);
+        done();
+      });
+  });
+
+  it(':::: should delete a users', function(done) {
     request(app)
       .post('/api/users')
       .send({
@@ -91,7 +102,7 @@ describe('[users]', function(){
       })
   });
 
-  it('should update a user', function(done) {
+  it(':::: should update a user', function(done) {
     const name_old = chance.name()
     const name_new = chance.name()
     request(app)
