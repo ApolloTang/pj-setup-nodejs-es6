@@ -9,9 +9,8 @@
     "watch": "babel -w src/ -d dist/",
     "build": "babel src/ -d dist/",
     "serve": "babel -w src/ -d dist/ | nodemon --watch dist dist/index.js",
-    "pretest": "babel src/ -d dist/",
-    "test": "node run-test.js",
-    "wtest": "babel -w src/ -d dist/ | nodemon --watch dist run-test.js"
+    "pretest": "",
+    "test": "cross-env ROOTPATH=`pwd` NODE_ENV=TEST \"mocha $(find ./src -name *spec.js) --watch --compilers js:babel-core/register\" "
   },
   "devDependencies": {
     "babel": "^6.23.0",
