@@ -3,7 +3,7 @@ import User from './user-model';
 import _ from 'lodash';
 
 const params = (req, res, next, _id) => {
-  let id = _id
+  let id = _id;
   if (id.match(/^[0-9a-fA-F]{24}$/)) {
     // Yes, it's a valid ObjectId, proceed with `findById` call.
     // Ref: http://stackoverflow.com/questions/14940660/whats-mongoose-error-cast-to-objectid-failed-for-value-xxx-at-path-id
@@ -12,14 +12,12 @@ const params = (req, res, next, _id) => {
         user=>{
           if (!user) {
             res.status(404).send(`No user with id: ${id}`);
-            // next(new Error(`No user with id: ${id}`));
           } else {
             req.user = user;
             next();
           }
         },
         err=>{
-          // res.status(404).send(`${err.message}. Meaning: No user with id: ${id}`);
           next(err);
         }
       );
