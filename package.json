@@ -1,17 +1,21 @@
 {
-  "name": "node-es6",
+  "name": "web-app-demo--api",
   "version": "1.0.0",
-  "description": "set up node pj in es6",
+  "description": "api to use with https://github.com/ApolloTang/web-app-demo--client--react-redux",
   "main": "index.js",
-  "author": "Apollo Tang",
-  "license": "MIT",
+  "author": "Apollo Tang <tang.apollo@gmail.com>",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ApolloTang/web-app-demo--client--react-redux"
+  },
   "scripts": {
     "watch": "babel -w src/ -d dist/",
     "build": "babel src/ -d dist/",
     "serve": "babel -w src/ -d dist/ | nodemon --watch dist dist/index.js",
     "pretest": "babel src/ -d dist/",
     "test": "node run-test.js",
-    "wtest": "babel -w src/ -d dist/ | nodemon --watch dist run-test.js"
+    "test:watch": "babel -w src/ -d dist/ | nodemon --watch dist run-test.js"
   },
   "devDependencies": {
     "babel": "^6.23.0",
