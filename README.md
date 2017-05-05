@@ -3,7 +3,7 @@
   * API to be used with a module in : 
       * https://github.com/ApolloTang/web-app-demo--client--react-redux
   * module location : 
-      * https://github.com/ApolloTang/web-app-demo--client--react-redux/src/modules/user-review/
+      * https://github.com/ApolloTang/web-app-demo--client--react-redux/tree/master/src/modules/user-review
   * documentation : 
       * https://github.com/ApolloTang/web-app-demo--client--react-redux/tree/master/src/modules/user-review/documentations
   
