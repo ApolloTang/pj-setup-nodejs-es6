@@ -12,6 +12,7 @@
   ```
   yarn
   ```
+  Mongodb is required
   
 ### Development with watch:
   ```
