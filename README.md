@@ -12,18 +12,16 @@
   ```
   yarn
   ```
-  Mongodb is required
-  
 ### Development with watch:
   ```
   yarn run serve
   ```
+  Make sure mongod is running in the background before issue the above command
   
 ### Development testing with watch:
   ```
   yarn test:watch
   ```
-  
 ### Build for distribution:
   ```
   yarn run build
