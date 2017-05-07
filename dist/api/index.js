@@ -1,0 +1,26 @@
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _express = require('express');
+
+var _express2 = _interopRequireDefault(_express);
+
+var _users = require('./users');
+
+var _users2 = _interopRequireDefault(_users);
+
+var _userCatelog = require('./user-catelog');
+
+var _userCatelog2 = _interopRequireDefault(_userCatelog);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+var router = _express2.default.Router();
+
+router.use('/users', _users2.default);
+router.use('/userCatelog', _userCatelog2.default);
+
+exports.default = router;
