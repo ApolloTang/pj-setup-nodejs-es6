@@ -14,7 +14,7 @@
   ```
 ### Development with watch:
   ```
-  yarn run serve
+  yarn dev
   ```
   Make sure mongod is running in the background before issue the above command
   
@@ -24,7 +24,7 @@
   ```
 ### Build for distribution:
   ```
-  yarn run build
+  yarn build
   ```
   
 
