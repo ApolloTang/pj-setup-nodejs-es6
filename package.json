@@ -14,7 +14,7 @@
     "build": "babel src/ -d dist/",
     "dev": "babel -w src/ -d dist/ | nodemon --watch dist dist/index.js",
     "prod:dryrun": "babel -w src/ -d dist/ | NODE_ENV=PROD PORT=3000 nodemon --watch dist dist/index.js",
-    "deploy": "git push heroku deploy-dryrun:master",
+    "deploy": "git push heroku deploy:master",
     "start": "NODE_ENV=PROD node dist/index.js",
     "pretest": "babel src/ -d dist/",
     "test": "node run-test.js",
