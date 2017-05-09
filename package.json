@@ -16,8 +16,7 @@
     "prod:dryrun": "babel -w src/ -d dist/ | NODE_ENV=PROD PORT=3000 nodemon --watch dist dist/index.js",
     "deploy": "git push heroku deploy:master",
     "start": "NODE_ENV=PROD node dist/index.js",
-    "pretest": "babel src/ -d dist/",
-    "test": "node run-test.js",
+    "test": "ROOTPATH=`pwd` NODE_ENV=test mocha $(find ./src/ -name *spec.js) --colors --compilers js:babel-core/register",
     "test:watch": "babel -w src/ -d dist/ | nodemon --watch dist run-test.js"
   },
   "devDependencies": {

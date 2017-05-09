@@ -2,7 +2,6 @@ import request from 'supertest';
 import {expect} from 'chai';
 
 const ROOTPATH = process.env.ROOTPATH;
-console.log('ROOTPATH: ', ROOTPATH );
 
 const fullPathToServer = ROOTPATH + '/src/server.js';
 const app = require(fullPathToServer).default;

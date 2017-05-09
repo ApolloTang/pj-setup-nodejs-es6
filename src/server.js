@@ -14,6 +14,7 @@ const mongoose = bluebird.promisifyAll(require("mongoose"));
 // mongoose.Promise = global.Promise;
 mongoose.Promise = bluebird;
 
+
 // mongoose.set('error', false);
 
 
@@ -24,8 +25,6 @@ try {
 } catch (err) {
   mongoose.createConnection(config.db.url);
 }
-
-logger.log(config);
 
 seedDataBase();
 

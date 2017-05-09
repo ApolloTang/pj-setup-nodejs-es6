@@ -2,13 +2,13 @@ import _ from 'lodash';
 
 const fileNameMap = {
   DEV: 'development',
-  TEST: 'testing',
+  test: 'testing',
   PROD: 'production'
 };
 
 const CONSTANTS = {
   DEV: 'DEV',
-  TEST: 'TEST',
+  TEST: 'test',
   PROD: 'PROD',
 };
 
