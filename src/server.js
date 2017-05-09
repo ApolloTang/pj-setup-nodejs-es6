@@ -1,4 +1,6 @@
 import config from './config';
+import logger from './util/logger';
+import seedDataBase from './util/seed';
 
 
 // -------------- //
@@ -22,6 +24,10 @@ try {
 } catch (err) {
   mongoose.createConnection(config.db.url);
 }
+
+logger.log(config);
+
+seedDataBase();
 
 
 // ------------- //
