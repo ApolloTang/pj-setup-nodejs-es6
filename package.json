@@ -5,6 +5,9 @@
   "main": "index.js",
   "author": "Apollo Tang <tang.apollo@gmail.com>",
   "license": "BSD-3-Clause",
+  "engines": {
+    "node": "12.19.0"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/ApolloTang/web-app-demo--client--react-redux"
